@@ -11,13 +11,13 @@ class ChapaLaravelServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         if ($this->app->runningInConsole()) {
             $config = realpath(__DIR__.'/../config/config.php');
 
             $this->publishes([
                 $config => config_path('chapa.php')
             ]);
+
         }
     }
 

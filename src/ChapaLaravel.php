@@ -2,31 +2,18 @@
 
 namespace Chapa\ChapaLaravel;
 
+use Illuminate\Support\Facades\Http;
+
 class ChapaLaravel
 {
-    protected $publicKey;
-    protected $secretKey;
-    protected $baseUrl;
-
-    /**
-     * Construct
-     */
-
-    function __construct()
-    {
-        $this->publicKey = config('config.publicKey');
-        $this->secretKey = config('config.secretKey');
-        $this->secretHash = config('config.secretHash');
-        $this->baseUrl = 'https://api.chapa.co/v1';
-    }
-
+ 
     /**
      * Generates a unique reference
      * @param $transactionPrefix
      * @return string
      */
 
-    public function generateReference(String $transactionPrefix = NULL)
+    public static function generateReference(String $transactionPrefix = NULL)
     {
         if ($transactionPrefix) {
             return $transactionPrefix . '_' . uniqid(time());
@@ -39,10 +26,19 @@ class ChapaLaravel
      * @param $data
      * @return object
      */
-    public function initializePayment(array $data)
+    public static function initializePayment(array $data)
     {
+        $publicKey = env('CHAPA_PUBLIC_KEY');
+        $secretKey = env('CHAPA_SECRET_KEY');
+        $secretHash = env('CHAPA_WEBHOOK_SECRET');
+        $baseUrl = 'https://api.chapa.co/v1';
 
+        $payment = Http::withToken($secretKey)->post(
+            $baseUrl . '/transaction/initialize',
+            $data
+        )->json();
 
+       return $payment;
     }
 
     /**
@@ -52,8 +48,7 @@ class ChapaLaravel
      */
     public function verifyTransaction($id)
     {
-
-
+        
     }
 
     public static function event()
