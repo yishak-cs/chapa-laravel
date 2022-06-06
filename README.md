@@ -9,13 +9,6 @@ Go to [Chapa](https://dashboard.chapa.co/) to signup and get your public and pri
 
 Please visit [Chapa](https://developer.chapa.co/docs/accept-payments/) for full documentation.
 
-## Installation
-
-<!-- You can install the package via composer:
-
-```bash
-composer require chapa/chapa-laravel
-``` -->
 
 ## API Reference
 
@@ -37,13 +30,6 @@ composer require chapa/chapa-laravel
 | `currency`                   | `string` | **Yes**. | The currency in which all the charges are made. Currency allowed is ETB.                                                                                                                            |
 | `customization[tiitle] `     | `string` | **No**.  | The customizations field (optional) allows you to customize the look and feel of the payment modal. You can set a logo, the store name to be displayed (title), and a description for the payment.. |
 | `customization[description]` | `string` | **No**.  | The customizations field (optional) allows you to customize the look and feel of the payment modal.                                                                                                 |
-
-## Usage
-
-```php
-
-
-```
 
 ### Changelog
 
