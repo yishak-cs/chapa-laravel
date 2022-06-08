@@ -1,6 +1,6 @@
 {
     "name": "chapa/chapa-laravel",
-    "description": "",
+    "description": "A Laravel Package to Accept Payment through Chapa",
     "keywords": [
         "chapa",
         "chapa-laravel"
@@ -25,13 +25,16 @@
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {
+        "classmap": [
+            "src/Chapa.php"
+        ],
         "psr-4": {
-            "Chapa\\ChapaLaravel\\": "src"
+            "Chapa\\Chapa\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Chapa\\ChapaLaravel\\Tests\\": "tests"
+            "Chapa\\Chapa\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -45,10 +48,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Chapa\\ChapaLaravel\\ChapaLaravelServiceProvider"
+                "Chapa\\Chapa\\ChapaServiceProvider"
             ],
             "aliases": {
-                "ChapaLaravel": "Chapa\\ChapaLaravel\\ChapaLaravelFacade"
+                "Chapa": "Chapa\\Chapa\\Facades\\Chapa"
             }
         }
     }
