@@ -1,10 +1,10 @@
 <?php
 
-namespace Chapa\ChapaLaravel;
+namespace Chapa\Chapa;
 
 use Illuminate\Support\ServiceProvider;
 
-class ChapaLaravelServiceProvider extends ServiceProvider
+class ChapaServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -27,14 +27,14 @@ class ChapaLaravelServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'chapa-laravel');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravelchapa');
 
         // Register the main class to use with the facade
-        $this->app->singleton('chapa-laravel', function () {
-            return new ChapaLaravel;
+        $this->app->singleton('laravelchapa', function () {
+            return new Chapa;
         });
 
-        $this->app->alias('laravelchapa', "Chapa\ChapaLaravel\ChapaLaravel");
+        $this->app->alias('laravelchapa', "Chapa\Chapa\Chapa");
 
     }
 

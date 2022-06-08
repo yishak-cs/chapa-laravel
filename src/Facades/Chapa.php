@@ -1,13 +1,13 @@
 <?php
 
-namespace Chapa\ChapaLaravel;
+namespace Chapa\Chapa\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Chapa\ChapaLaravel\Skeleton\SkeletonClass
+ * @see \Chapa\Chapa\Skeleton\SkeletonClass
  */
-class ChapaLaravelFacade extends Facade
+class Chapa extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class ChapaLaravelFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'chapa-laravel';
+        return 'laravelchapa';
     }
 }
