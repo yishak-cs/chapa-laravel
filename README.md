@@ -46,7 +46,8 @@ If you discover any security related issues, please email kidusy@chapa.co instea
 
 ## Credits
 
-- [Kidus Yared](https://github.com/chapa)
+- [kidus363](https://github.com/chapa)
+- [isrugeek](https://github.com/chapa)
 
 ## License
 
