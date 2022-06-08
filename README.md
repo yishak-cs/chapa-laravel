@@ -10,6 +10,11 @@ Go to [Chapa](https://dashboard.chapa.co/) to signup and get your public and pri
 Please visit [Chapa](https://developer.chapa.co/docs/accept-payments/) for full documentation.
 
 
+## Guide
+
+Please visit [Developers Guide](https://developer.chapa.co/laravel-sdk/) for full guide and examples.
+
+
 ## API Reference
 
 #### Collecting Customer Information
