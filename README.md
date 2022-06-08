@@ -32,7 +32,7 @@ CHAPA_WEBHOOK_SECRET='My_webook_secret_key123'
 The current features have been implemented
 
 - Initiate Payment
-- Payment verification verification
+- Payment verification
 
 ## API Reference
 
