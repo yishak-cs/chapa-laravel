@@ -3,6 +3,7 @@
 namespace Chapa\Chapa;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class Chapa
 {
@@ -18,15 +19,18 @@ class Chapa
     protected $publicKey;
     protected $secretKey;
     protected $baseUrl;
+    protected $secretHash;
 
 
     function __construct()
     {
+        
 
         $this->publicKey = env('CHAPA_PUBLIC_KEY');
         $this->secretKey = env('CHAPA_SECRET_KEY');
         $this->secretHash = env('CHAPA_WEBHOOK_SECRET');
         $this->baseUrl = 'https://api.chapa.co/v1';
+        
     }    
 
     public static function generateReference(String $transactionPrefix = NULL)
@@ -34,6 +38,7 @@ class Chapa
         if ($transactionPrefix) {
             return $transactionPrefix . '_' . uniqid(time());
         }
+        
         return 'chapa_' . uniqid(time());
     }
 
@@ -42,8 +47,9 @@ class Chapa
      * @param $data
      * @return object
      */
-    public static function initializePayment(array $data)
+    public function initializePayment(array $data)
     {
+        
 
 
         $payment = Http::withToken($this->secretKey)->post(
@@ -65,15 +71,6 @@ class Chapa
         return $data;
     }
 
-    public function getTransactionIDFromCallback()
-    {
-        $transactionID = request()->tx_ref;
 
-        if (!$transactionID) {
-            $transactionID = json_decode(request()->resp)->data->tx_ref;
-        }
-
-        return $transactionID;
-    }
 
 }
