@@ -1,4 +1,11 @@
-# Unofficial laravel package for Chapa's API (Laravel 5,6,7,9 )
+<h1 align="center">
+<div align="center">
+  <a href="http://chapa.co/" target="_blank">
+    <img src="https://assets.chapa.co/assets/images/chapa-logo.svg" width="320" alt="Chapa Logo"/>
+  </a>
+  <p align="center">Unofficial laravel package for Chapa's API (Laravel 5,6,7,9 )</p>
+</div>
+</h1>
 
 If your are doing a laravel project and want to integrate chapa's payment
 solution, this package would help big time.
