@@ -16,10 +16,5 @@ return [
      */
     'secretKey' => env('CHAPA_SECRET_KEY'),
 
-    /**
-     * Secret for webhook
-     *
-     */
-    'secretKey' => env('CHAPA_WEBHOOK_SECRET')
-    
+
 ];

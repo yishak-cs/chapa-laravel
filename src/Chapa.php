@@ -17,14 +17,12 @@ class Chapa
 
     protected $secretKey;
     protected $baseUrl;
-    protected $secretHash;
 
 
     function __construct()
     {
         
         $this->secretKey = env('CHAPA_SECRET_KEY');
-        $this->secretHash = env('CHAPA_WEBHOOK_SECRET');
         $this->baseUrl = 'https://api.chapa.co/v1';
         
     }    
