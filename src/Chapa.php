@@ -15,20 +15,14 @@ class Chapa
      */
 
 
-
-    protected $publicKey;
     protected $secretKey;
     protected $baseUrl;
-    protected $secretHash;
 
 
     function __construct()
     {
         
-
-        $this->publicKey = env('CHAPA_PUBLIC_KEY');
         $this->secretKey = env('CHAPA_SECRET_KEY');
-        $this->secretHash = env('CHAPA_WEBHOOK_SECRET');
         $this->baseUrl = 'https://api.chapa.co/v1';
         
     }    
@@ -39,7 +33,7 @@ class Chapa
             return $transactionPrefix . '_' . uniqid(time());
         }
         
-        return 'chapa_' . uniqid(time());
+        return env('APP_NAME').'_'.'chapa_' . uniqid(time());
     }
 
     /**
@@ -49,8 +43,6 @@ class Chapa
      */
     public function initializePayment(array $data)
     {
-        
-
 
         $payment = Http::withToken($this->secretKey)->post(
             $this->baseUrl . '/transaction/initialize',
@@ -58,6 +50,21 @@ class Chapa
         )->json();
 
        return $payment;
+    }
+
+        /**
+     * Gets a transaction ID depending on the redirect structure
+     * @return string
+     */
+    public function getTransactionIDFromCallback()
+    {
+        $transactionID = request()->trx_ref;
+
+        if (!$transactionID) {
+            $transactionID = json_decode(request()->resp)->data->id;
+        }
+
+        return $transactionID;
     }
 
     /**
@@ -70,7 +77,5 @@ class Chapa
         $data =  Http::withToken($this->secretKey)->get($this->baseUrl . "/transaction/" . 'verify/'. $id )->json();
         return $data;
     }
-
-
 
 }
