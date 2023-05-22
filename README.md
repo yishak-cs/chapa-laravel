@@ -30,7 +30,6 @@ Open your .env file and add your public key, secret keys, and other environment 
 
 ```
 CHAPA_SECRET_KEY=FLWSECK-xxxxxxxxxxxxxxxxxxxxx-X
-CHAPA_WEBHOOK_SECRET='My_webook_secret_key123'
 ```
 
 ## Features
