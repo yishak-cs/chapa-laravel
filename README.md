@@ -38,6 +38,8 @@ The current features have been implemented
 
 - Initiate Payment
 - Payment verification
+- Create a Transfer
+- Verify a Transfer
 
 ## API Reference
 
@@ -66,6 +68,18 @@ The current features have been implemented
 
 ```https
   GET https://api.chapa.dev/v1/transaction/verify/{tx-ref}
+```
+
+| Parameter | Type     | Required | Description                                                                                                          |
+| :-------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `key`     | `string` | **Yes**. | This will be your public key from Chapa. When on test mode use the test key, and when on live mode use the live key. |
+
+
+
+### Verify Transfers
+
+```https
+  GET https://api.chapa.dev/v1/transfers/verify/{tx-ref}
 ```
 
 | Parameter | Type     | Required | Description                                                                                                          |
