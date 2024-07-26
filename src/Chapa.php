@@ -77,5 +77,31 @@ class Chapa
         $data =  Http::withToken($this->secretKey)->get($this->baseUrl . "/transaction/" . 'verify/'. $id )->json();
         return $data;
     }
+    /**
+     * Reaches out to Chapa to create a transfer to a bank account or wallet
+     * @param $data
+     * @return object
+     */
+
+    public function createTransfer(array $data)
+    {
+        $transfer = Http::withToken($this->secretKey)->post(
+            $this->baseUrl . '/transfer',
+            $data
+        )->json();
+
+       return $transfer;
+    }
+
+    /**
+     * Reaches out to Chapa to verify a transfer
+     * @param $id
+     * @return object
+     */
+    public function verifyTransfer($id)
+    {
+        $data =  Http::withToken($this->secretKey)->get($this->baseUrl . "/transfers/" . 'verify/'. $id )->json();
+        return $data;
+    }
 
 }
