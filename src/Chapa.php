@@ -37,6 +37,21 @@ class Chapa
     }
 
     /**
+     * Create Subaccount.
+     * @param array $data
+     * @return array
+     */
+    public function createSubaccount(array $data)
+    {
+        $response = Http::withToken($this->secretKey)->post(
+            $this->baseUrl . '/sub-accounts',
+            $data
+        )->json();
+
+        return $response;
+    }
+
+    /**
      * Reaches out to Chapa to initialize a payment
      * @param $data
      * @return object
@@ -135,4 +150,21 @@ class Chapa
 
         return $response;
     }
+
+    /**
+     * Gets a list of banks
+     * 
+     * @return array
+     */
+    public function getBanks()
+    {
+        // Send a GET request to Chapa's /v1/banks endpoint
+        $response = Http::withToken($this->secretKey)
+            ->get($this->baseUrl . "/banks")
+            ->json();
+
+        // Return the response data
+        return $response;
+    }
+
 }
