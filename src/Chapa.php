@@ -101,7 +101,7 @@ class Chapa
     public function createTransfer(array $data)
     {
         $transfer = Http::withToken($this->secretKey)->post(
-            $this->baseUrl . '/transfer',
+            $this->baseUrl . '/transfers',
             $data
         )->json();
 
