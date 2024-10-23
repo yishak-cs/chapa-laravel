@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class Chapa
 {
- 
+
     /**
      * Generates a unique reference
      * @param $transactionPrefix
@@ -21,19 +21,34 @@ class Chapa
 
     function __construct()
     {
-        
+
         $this->secretKey = env('CHAPA_SECRET_KEY');
         $this->baseUrl = 'https://api.chapa.co/v1';
-        
-    }    
 
-    public static function generateReference(String $transactionPrefix = NULL)
+    }
+
+    public static function generateReference(string $transactionPrefix = NULL)
     {
         if ($transactionPrefix) {
             return $transactionPrefix . '_' . uniqid(time());
         }
-        
-        return env('APP_NAME').'_'.'chapa_' . uniqid(time());
+
+        return env('APP_NAME') . '_' . 'chapa_' . uniqid(time());
+    }
+
+    /**
+     * Create Subaccount.
+     * @param array $data
+     * @return array
+     */
+    public function createSubaccount(array $data)
+    {
+        $response = Http::withToken($this->secretKey)->post(
+            $this->baseUrl . '/sub-accounts',
+            $data
+        )->json();
+
+        return $response;
     }
 
     /**
@@ -49,10 +64,10 @@ class Chapa
             $data
         )->json();
 
-       return $payment;
+        return $payment;
     }
 
-        /**
+    /**
      * Gets a transaction ID depending on the redirect structure
      * @return string
      */
@@ -74,7 +89,7 @@ class Chapa
      */
     public function verifyTransaction($id)
     {
-        $data =  Http::withToken($this->secretKey)->get($this->baseUrl . "/transaction/" . 'verify/'. $id )->json();
+        $data = Http::withToken($this->secretKey)->get($this->baseUrl . "/transaction/" . 'verify/' . $id)->json();
         return $data;
     }
     /**
@@ -90,7 +105,7 @@ class Chapa
             $data
         )->json();
 
-       return $transfer;
+        return $transfer;
     }
 
     /**
@@ -100,8 +115,56 @@ class Chapa
      */
     public function verifyTransfer($id)
     {
-        $data =  Http::withToken($this->secretKey)->get($this->baseUrl . "/transfers/" . 'verify/'. $id )->json();
+        $data = Http::withToken($this->secretKey)->get($this->baseUrl . "/transfers/" . 'verify/' . $id)->json();
         return $data;
+    }
+
+    /**
+     * Validate incoming webhook event is from Chapa.
+     *
+     * @param $request
+     * @return boolean
+     */
+    public function validateWebhook($request)
+    {
+        $signature = $request->header('x-chapa-signature');
+        $expectedSignature = hash_hmac('sha256', $request->getContent(), env('CHAPA_WEBHOOK_SECRET'));
+
+        if ($signature !== $expectedSignature) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Initiates a bulk transfer.
+     * @param array $data
+     * @return array
+     */
+    public function bulkTransfer(array $data)
+    {
+        $response = Http::withToken($this->secretKey)->post(
+            $this->baseUrl . '/bulk-transfers',
+            $data
+        )->json();
+
+        return $response;
+    }
+
+    /**
+     * Gets a list of banks
+     * 
+     * @return array
+     */
+    public function getBanks()
+    {
+        // Send a GET request to Chapa's /v1/banks endpoint
+        $response = Http::withToken($this->secretKey)
+            ->get($this->baseUrl . "/banks")
+            ->json();
+
+        // Return the response data
+        return $response;
     }
 
 }
