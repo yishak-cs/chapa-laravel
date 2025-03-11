@@ -4,6 +4,7 @@
     <img src="https://assets.chapa.co/assets/images/chapa-logo.svg" width="320" alt="Chapa Logo"/>
   </a>
   <p align="center">Official Laravel package for Chapa's API (Laravel 5,6,7,9,10,11)</p>
+    <p align="center">This is my adaptation of chapa/laravel-sdk for Laravel 12</p>
 </div>
 </h1>
 
